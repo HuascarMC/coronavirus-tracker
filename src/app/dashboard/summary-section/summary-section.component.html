@@ -1,0 +1,8 @@
+<p-toast [style]="{ marginTop: '200px' }"></p-toast>
+
+<p-chart
+    type="line"
+    [data]="dataSet"
+    (onDataSelect)="selectData($event)"
+    [options]="chartOptions"
+></p-chart>

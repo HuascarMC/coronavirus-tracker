@@ -8,10 +8,18 @@ import { DashboardService } from "./dashboard.service";
 })
 export class DashboardComponent implements OnInit {
     data: any;
+    country: string;
 
     constructor(private boardService: DashboardService) {}
 
     ngOnInit(): void {
-        this.data = this.boardService.fetch().subscribe((response) => {});
+        this.fetchData();
+        this.country = "Dominican Republic";
+    }
+
+    fetchData(): any {
+        this.boardService.fetch().subscribe((response) => {
+            this.data = response;
+        });
     }
 }
