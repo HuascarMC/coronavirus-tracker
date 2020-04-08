@@ -1,6 +1,20 @@
-<p-toast [style]="{ marginTop: '200px' }"></p-toast>
-
+<p-toast></p-toast>
+<div class="row">
+    <div class="col-md-4">
+        <b>Total Comfirmed: </b>
+        <h2>{{ this.data.slice(-1)[0].confirmed }}</h2>
+    </div>
+    <div class="col-md-4">
+        <b>Deaths: </b>
+        <h2>{{ this.data.slice(-1)[0].deaths }}</h2>
+    </div>
+    <div class="col-md-4">
+        <b>Recovered </b>
+        <h2>{{ this.data.slice(-1)[0].recovered }}</h2>
+    </div>
+</div>
 <p-chart
+    id="chart"
     type="line"
     [data]="dataSet"
     (onDataSelect)="selectData($event)"

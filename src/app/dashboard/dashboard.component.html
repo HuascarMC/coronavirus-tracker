@@ -1,3 +1,8 @@
 <div *ngIf="data">
-    <app-summary-section [data]="data[country]"></app-summary-section>
+    <div class="row">
+        <app-summary-section
+            class="col-md-12"
+            [data]="data[country]"
+        ></app-summary-section>
+    </div>
 </div>

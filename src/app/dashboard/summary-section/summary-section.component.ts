@@ -17,66 +17,7 @@ export class SummarySectionComponent implements OnInit {
     constructor(private messageService: MessageService) {}
 
     ngOnInit() {
-        console.log(this.data);
-        this.dataSet = {
-            labels: this.getDates(this.last),
-
-            datasets: [
-                {
-                    label: "Confirmed",
-                    data: this.getConfirmed(this.last),
-                    fill: false,
-                    backgroundColor: "#4bc0c0",
-                    borderColor: "#4bc0c0"
-                },
-                {
-                    label: "Deaths",
-                    data: this.getDeaths(this.last),
-                    fill: false,
-                    backgroundColor: "red",
-                    borderColor: "red"
-                },
-                {
-                    label: "Recovered",
-                    data: this.getRecovered(this.last),
-                    fill: false,
-                    backgroundColor: "green",
-                    borderColor: "green"
-                }
-            ]
-        };
-        this.chartOptions = {
-            chart: {
-                backgroundColor: "gray"
-            },
-            legend: {
-                labels: {
-                    fontColor: "white"
-                }
-            },
-            scales: {
-                xAxes: [
-                    {
-                        gridLines: {
-                            color: "white"
-                        },
-                        ticks: {
-                            fontColor: "white"
-                        }
-                    }
-                ],
-                yAxes: [
-                    {
-                        gridLines: {
-                            color: "white"
-                        },
-                        ticks: {
-                            fontColor: "white"
-                        }
-                    }
-                ]
-            }
-        };
+        this.setChart();
     }
 
     getDates(last: number) {
@@ -117,5 +58,68 @@ export class SummarySectionComponent implements OnInit {
                 event.element._index
             ]
         });
+    }
+
+    setChart() {
+        this.dataSet = {
+            labels: this.getDates(this.last),
+
+            datasets: [
+                {
+                    label: "Confirmed",
+                    data: this.getConfirmed(this.last),
+                    fill: false,
+                    backgroundColor: "#4bc0c0",
+                    borderColor: "#4bc0c0"
+                },
+                {
+                    label: "Deaths",
+                    data: this.getDeaths(this.last),
+                    fill: false,
+                    backgroundColor: "red",
+                    borderColor: "red"
+                },
+                {
+                    label: "Recovered",
+                    data: this.getRecovered(this.last),
+                    fill: false,
+                    backgroundColor: "green",
+                    borderColor: "green"
+                }
+            ]
+        };
+        this.chartOptions = {
+            responsive: true,
+            chart: {
+                backgroundColor: "gray"
+            },
+            legend: {
+                labels: {
+                    fontColor: "white"
+                }
+            },
+            scales: {
+                xAxes: [
+                    {
+                        gridLines: {
+                            color: "white"
+                        },
+                        ticks: {
+                            fontColor: "white"
+                        }
+                    }
+                ],
+                yAxes: [
+                    {
+                        gridLines: {
+                            color: "white"
+                        },
+                        ticks: {
+                            fontColor: "white"
+                        }
+                    }
+                ]
+            }
+        };
     }
 }
