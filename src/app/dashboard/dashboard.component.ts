@@ -22,4 +22,8 @@ export class DashboardComponent implements OnInit {
             this.data = response;
         });
     }
+
+    updateCountry(event) {
+        this.country = event;
+    }
 }

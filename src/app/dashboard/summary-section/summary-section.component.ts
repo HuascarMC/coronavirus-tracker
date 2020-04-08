@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
 import { Chart } from "chart.js";
 import { MessageService } from "primeng";
 import { preserveWhitespacesDefault } from "@angular/compiler";
@@ -18,6 +18,11 @@ export class SummarySectionComponent implements OnInit {
 
     ngOnInit() {
         this.setChart();
+        console.log(this.data);
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        this.ngOnInit();
     }
 
     getDates(last: number) {
@@ -38,7 +43,6 @@ export class SummarySectionComponent implements OnInit {
         const deaths = this.data.map((dataSet) => {
             return dataSet.deaths;
         });
-        console.log(deaths);
 
         return deaths.slice(1).slice(last * -1);
     }

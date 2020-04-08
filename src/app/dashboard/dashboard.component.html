@@ -1,6 +1,8 @@
 <div *ngIf="data">
+    <app-search-bar (searchSubmit)="updateCountry($event)"></app-search-bar>
     <div class="row">
         <app-summary-section
+            #summary
             class="col-md-12"
             [data]="data[country]"
         ></app-summary-section>
