@@ -18,10 +18,10 @@ export class SummarySectionComponent implements OnInit {
 
     ngOnInit() {
         this.setChart();
-        console.log(this.data);
     }
 
-    ngOnChanges(changes: SimpleChanges) {
+    ngOnChanges() {
+        console.log(this.data);
         this.ngOnInit();
     }
 
@@ -87,8 +87,8 @@ export class SummarySectionComponent implements OnInit {
                     label: "Recovered",
                     data: this.getRecovered(this.last),
                     fill: false,
-                    backgroundColor: "green",
-                    borderColor: "green"
+                    backgroundColor: "#3a7c30",
+                    borderColor: "#3a7c30"
                 }
             ]
         };
