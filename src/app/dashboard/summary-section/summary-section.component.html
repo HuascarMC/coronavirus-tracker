@@ -4,15 +4,19 @@
     <div class="column col-md-2">
         <div class="meta-data">
             <b>Total Comfirmed: </b>
-            <h2>{{ this.data.slice(-1)[0].confirmed }}</h2>
+            <h2 style="color: #4bc0c0;">
+                {{ this.data.slice(-1)[0].confirmed }}
+            </h2>
         </div>
         <div class="meta-data">
             <b>Deaths: </b>
-            <h2>{{ this.data.slice(-1)[0].deaths }}</h2>
+            <h2 style="color: red;">{{ this.data.slice(-1)[0].deaths }}</h2>
         </div>
         <div class="meta-data">
             <b>Recovered </b>
-            <h2>{{ this.data.slice(-1)[0].recovered }}</h2>
+            <h2 style="color: #3a7c30;">
+                {{ this.data.slice(-1)[0].recovered }}
+            </h2>
         </div>
     </div>
     <p-chart

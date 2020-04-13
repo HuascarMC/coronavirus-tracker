@@ -96,7 +96,8 @@ export class SummarySectionComponent implements OnInit {
             legend: {
                 labels: {
                     fontColor: "white"
-                }
+                },
+                position: "bottom"
             },
             scales: {
                 xAxes: [
@@ -105,7 +106,8 @@ export class SummarySectionComponent implements OnInit {
                             color: "white"
                         },
                         ticks: {
-                            fontColor: "white"
+                            fontColor: "white",
+                            fontSize: 15
                         }
                     }
                 ],
@@ -115,7 +117,8 @@ export class SummarySectionComponent implements OnInit {
                             color: "white"
                         },
                         ticks: {
-                            fontColor: "white"
+                            fontColor: "white",
+                            fontSize: 15
                         }
                     }
                 ]
