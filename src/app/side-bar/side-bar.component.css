@@ -1,0 +1,29 @@
+:host {
+    width: 40%;
+    height: 100vw;
+    display: block;
+    background-color: #242926;
+    overflow-y: hidden;
+}
+
+.row-fluid {
+    color: white;
+    width: 80%;
+    height: 40px;
+    border-radius: 4em;
+    margin: auto;
+    text-align: center;
+    padding-top: 4%;
+}
+
+.stats-container {
+    border-radius: 1.5em;
+    background-color: #191515;
+    padding: 1.5em;
+    text-align: center;
+    margin: auto;
+}
+
+.col-10 {
+    margin: auto;
+}

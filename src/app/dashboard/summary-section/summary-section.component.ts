@@ -13,7 +13,7 @@ export class SummarySectionComponent implements OnInit {
     @Input() country: string;
     dataSet: any;
     chartOptions: any;
-    last = 10;
+    last = 15;
 
     constructor(private messageService: MessageService) {}
 

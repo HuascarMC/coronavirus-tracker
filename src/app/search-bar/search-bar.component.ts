@@ -6,7 +6,6 @@ import {
     ɵConsole
 } from "@angular/core";
 import { SearchBarService } from "./search-bar.service";
-import { country } from "../shared/models/country.model";
 
 @Component({
     selector: "app-search-bar",
@@ -38,6 +37,7 @@ export class SearchBarComponent implements OnInit {
     fetchCountries(event) {
         let query = event.query;
         this.searchBarService.fetchCountries().subscribe((countries) => {
+            console.log(countries);
             this.countries = this.filterCountry(query, Object.keys(countries));
         });
     }

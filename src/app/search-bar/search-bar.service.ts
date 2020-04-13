@@ -20,8 +20,8 @@ export class SearchBarService {
     // }
 
     fetchCountries() {
-        return this.http
-            .get("https://pomber.github.io/covid19/timeseries.json")
-            .pipe(catchError((error: any) => Observable.throw(error.error)));
+        return this.http.get(
+            "https://pomber.github.io/covid19/timeseries.json"
+        );
     }
 }
