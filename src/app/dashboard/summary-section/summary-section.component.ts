@@ -10,6 +10,7 @@ import { preserveWhitespacesDefault } from "@angular/compiler";
 })
 export class SummarySectionComponent implements OnInit {
     @Input() data: any;
+    @Input() country: string;
     dataSet: any;
     chartOptions: any;
     last = 10;
@@ -18,11 +19,6 @@ export class SummarySectionComponent implements OnInit {
 
     ngOnInit() {
         this.setChart();
-    }
-
-    ngOnChanges() {
-        console.log(this.data);
-        this.ngOnInit();
     }
 
     getDates(last: number) {

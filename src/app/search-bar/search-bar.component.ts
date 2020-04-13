@@ -1,4 +1,12 @@
-import { Component, OnInit, EventEmitter, Output } from "@angular/core";
+import {
+    Component,
+    OnInit,
+    EventEmitter,
+    Output,
+    ɵConsole
+} from "@angular/core";
+import { SearchBarService } from "./search-bar.service";
+import { country } from "../shared/models/country.model";
 
 @Component({
     selector: "app-search-bar",
@@ -7,13 +15,36 @@ import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 })
 export class SearchBarComponent implements OnInit {
     @Output() searchSubmit = new EventEmitter<any>();
+    countries: any[];
 
-    constructor() {}
+    country: string;
+
+    constructor(private searchBarService: SearchBarService) {}
 
     ngOnInit(): void {}
 
+    filterCountry(query, countries: string[]): any[] {
+        //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+        let filtered: any[] = [];
+        for (let i in countries) {
+            if (countries[i].toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                filtered.push(countries[i]);
+            }
+        }
+
+        return filtered;
+    }
+
+    fetchCountries(event) {
+        let query = event.query;
+        this.searchBarService.fetchCountries().subscribe((countries) => {
+            this.countries = this.filterCountry(query, Object.keys(countries));
+        });
+    }
+
     search(event) {
-        const country = new FormData(event.target).get("country");
+        console.log(event);
+        const country = event.target.elements[0].value;
         this.searchSubmit.emit(this.toTitleCase(country));
     }
 

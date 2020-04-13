@@ -1,9 +1,24 @@
-<form (ngSubmit)="search($event)">
-    <input
-        class="search-bar"
-        type="text"
-        name="country"
-        placeholder="Search Country..."
-        autocomplete="off"
-    />
+<form autocomplete="off" (ngSubmit)="search($event)">
+    <p-autoComplete
+        [(ngModel)]="country"
+        [suggestions]="countries"
+        (completeMethod)="fetchCountries($event)"
+        [size]="30"
+        [minLength]="1"
+        placeholder="Search Country"
+        [dropdown]="true"
+        name="countries"
+        [style]="{ width: '100%' }"
+        [inputStyle]="{ width: '100%' }"
+        field="name"
+        (onSelect)="this.searchSubmit.emit($event)"
+    >
+        <ng-template let-country pTemplate="item">
+            <div class="ui-helper-clearfix">
+                <div style="font-size: 27px; padding-left: 15%;" id="country">
+                    {{ country }}
+                </div>
+            </div>
+        </ng-template>
+    </p-autoComplete>
 </form>

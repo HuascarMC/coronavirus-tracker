@@ -9,6 +9,9 @@ import { ChartModule, ToastModule, MessageService } from "primeng";
 import { TopBarComponent } from "./top-bar/top-bar.component";
 import { SearchBarComponent } from "./search-bar/search-bar.component";
 import { FormsModule } from "@angular/forms";
+import { AutoCompleteModule } from "primeng/autocomplete";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { DropdownModule } from "primeng/dropdown";
 
 @NgModule({
     declarations: [
@@ -23,7 +26,10 @@ import { FormsModule } from "@angular/forms";
         BrowserModule,
         HttpClientModule,
         ChartModule,
-        ToastModule
+        ToastModule,
+        AutoCompleteModule,
+        BrowserAnimationsModule,
+        DropdownModule
     ],
     providers: [MessageService],
     bootstrap: [AppComponent]
