@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { SideBarService } from "./side-bar.service";
 
 @Component({
@@ -7,16 +7,26 @@ import { SideBarService } from "./side-bar.service";
     styleUrls: ["./side-bar.component.css"]
 })
 export class SideBarComponent implements OnInit {
-    totals: any;
+    @Input() data;
+
+    confirmed: number;
+    deaths: number;
+    recovered: number;
+
     constructor(private sideBarService: SideBarService) {}
 
     ngOnInit(): void {
-        this.fetchTotals();
+        this.confirmed = 0;
+        this.deaths = 0;
+        this.recovered = 0;
+        this.getTotals();
     }
 
-    fetchTotals() {
-        this.sideBarService.fetchTotal().subscribe((data) => {
-            this.totals = data;
-        });
+    getTotals() {
+        for (let c in this.data) {
+            this.confirmed += this.data[c].slice(-1)[0].confirmed;
+            this.deaths += this.data[c].slice(-1)[0].deaths;
+            this.recovered += this.data[c].slice(-1)[0].recovered;
+        }
     }
 }

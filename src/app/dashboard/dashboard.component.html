@@ -1,7 +1,7 @@
 <div *ngIf="data">
     <app-search-bar (searchSubmit)="updateCountry($event)"></app-search-bar>
     <div class="row">
-        <app-side-bar class="col-3"></app-side-bar>
+        <app-side-bar class="col-3" [data]="data"></app-side-bar>
         <app-summary-section
             #summary
             class="col-6 container"

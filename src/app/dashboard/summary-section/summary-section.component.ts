@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { Chart } from "chart.js";
-import { MessageService } from "primeng";
-import { preserveWhitespacesDefault } from "@angular/compiler";
+import { MessageService, UIChart } from "primeng";
 
 @Component({
     selector: "app-summary-section",
@@ -11,28 +10,134 @@ import { preserveWhitespacesDefault } from "@angular/compiler";
 export class SummarySectionComponent implements OnInit {
     @Input() data: any;
     @Input() country: string;
+    @ViewChild("lineChart") chart: Chart;
     dataSet: any;
     chartOptions: any;
-    last = 15;
+    last = 7;
+    fromDate: Date;
+    toDate: Date;
+    minDate: Date;
+    maxDate: Date;
+    xAxesLabels: any;
+    confirmed: any[];
+    deaths: any[];
+    recovered: any[];
 
     constructor(private messageService: MessageService) {}
 
     ngOnInit() {
+        this.minDate = new Date(this.data[0].date);
+        this.maxDate = new Date(this.data[this.data.length - 1].date);
+        this.getSelectedData();
         this.setChart();
     }
 
-    getDates(last: number) {
+    ngOnChanges() {
+        this.getSelectedData();
+        this.setChart();
+    }
+
+    onSelect(event) {
+        Promise.resolve(this.getSelectedData()).then(() => {
+            console.log(this.confirmed);
+            console.log(this.deaths);
+            console.log(this.recovered);
+            this.setChart();
+        });
+    }
+
+    getSelectedData() {
+        this.getDatesByFromTo();
+        this.getConfirmedByFromTo();
+        this.getDeathsByFromTo();
+        this.getRecoveredByFromTo();
+    }
+
+    getRecoveredByFromTo() {
+        this.recovered = [];
+        this.data.forEach((dataSet) => {
+            const date = new Date(dataSet.date);
+            if (this.toDate) {
+                if (date >= this.fromDate && date <= this.toDate) {
+                    this.recovered.push(dataSet.recovered);
+                }
+            } else if (this.fromDate) {
+                if (date >= this.fromDate && date <= this.maxDate) {
+                    this.recovered.push(dataSet.recovered);
+                }
+            } else {
+                this.getRecovered(this.last);
+            }
+        });
+    }
+
+    getDeathsByFromTo() {
+        this.deaths = [];
+        this.data.forEach((dataSet) => {
+            const date = new Date(dataSet.date);
+            if (this.toDate) {
+                if (date >= this.fromDate && date <= this.toDate) {
+                    this.deaths.push(dataSet.deaths);
+                }
+            } else if (this.fromDate) {
+                if (date >= this.fromDate && date <= this.maxDate) {
+                    this.deaths.push(dataSet.deaths);
+                }
+            } else {
+                this.getDeaths(this.last);
+            }
+        });
+    }
+
+    getConfirmedByFromTo() {
+        this.confirmed = [];
+        this.data.forEach((dataSet) => {
+            const date = new Date(dataSet.date);
+            if (this.toDate) {
+                if (date >= this.fromDate && date <= this.toDate) {
+                    this.confirmed.push(dataSet.confirmed);
+                }
+            } else if (this.fromDate) {
+                if (date >= this.fromDate && date <= this.maxDate) {
+                    this.confirmed.push(dataSet.confirmed);
+                }
+            } else {
+                this.getConfirmed(this.last);
+            }
+        });
+    }
+
+    getDatesByFromTo() {
+        this.getConfirmedByFromTo();
+        this.xAxesLabels = [];
+        this.data.forEach((dataSet) => {
+            const date = new Date(dataSet.date);
+            if (this.toDate) {
+                if (date >= this.fromDate && date <= this.toDate) {
+                    this.xAxesLabels.push(dataSet.date);
+                }
+            } else if (this.fromDate) {
+                if (date >= this.fromDate && date <= this.maxDate) {
+                    this.xAxesLabels.push(dataSet.date);
+                }
+            } else {
+                this.getDatesBy(this.last);
+            }
+        });
+    }
+
+    getDatesBy(last: number) {
         const dates = this.data.map((dataSet) => {
             return dataSet.date;
         });
-        return dates.slice(1).slice(last * -1);
+        this.xAxesLabels = dates.slice(1).slice(last * -1);
     }
 
     getConfirmed(last: number) {
         const confirmed = this.data.map((dataSet) => {
             return dataSet.confirmed;
         });
-        return confirmed.slice(1).slice(last * -1);
+        this.confirmed = confirmed.slice(1).slice(last * -1);
     }
 
     getDeaths(last: number) {
@@ -40,14 +145,14 @@ export class SummarySectionComponent implements OnInit {
             return dataSet.deaths;
         });
 
-        return deaths.slice(1).slice(last * -1);
+        this.deaths = deaths.slice(1).slice(last * -1);
     }
 
     getRecovered(last: number) {
         const recovered = this.data.map((dataSet) => {
             return dataSet.recovered;
         });
-        return recovered.slice(1).slice(last * -1);
+        this.recovered = recovered.slice(1).slice(last * -1);
     }
 
     selectData(event) {
@@ -62,26 +167,26 @@ export class SummarySectionComponent implements OnInit {
 
     setChart() {
         this.dataSet = {
-            labels: this.getDates(this.last),
+            labels: this.xAxesLabels,
 
             datasets: [
                 {
                     label: "Confirmed",
-                    data: this.getConfirmed(this.last),
+                    data: this.confirmed,
                     fill: false,
                     backgroundColor: "#4bc0c0",
                     borderColor: "#4bc0c0"
                 },
                 {
                     label: "Deaths",
-                    data: this.getDeaths(this.last),
+                    data: this.deaths,
                     fill: false,
                     backgroundColor: "red",
                     borderColor: "red"
                 },
                 {
                     label: "Recovered",
-                    data: this.getRecovered(this.last),
+                    data: this.recovered,
                     fill: false,
                     backgroundColor: "#3a7c30",
                     borderColor: "#3a7c30"

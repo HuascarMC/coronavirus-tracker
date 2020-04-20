@@ -10,7 +10,7 @@
 }
 
 .meta-data {
-    height: 42%;
+    height: 34%;
     width: 100%;
 }
 
@@ -23,4 +23,8 @@
     :host {
         border-radius: 0;
     }
+}
+
+.date-container {
+    text-align: right;
 }

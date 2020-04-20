@@ -12,7 +12,8 @@ import { FormsModule } from "@angular/forms";
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DropdownModule } from "primeng/dropdown";
-import { SideBarComponent } from './side-bar/side-bar.component';
+import { SideBarComponent } from "./side-bar/side-bar.component";
+import { CalendarModule } from "primeng/calendar";
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import { SideBarComponent } from './side-bar/side-bar.component';
         ToastModule,
         AutoCompleteModule,
         BrowserAnimationsModule,
-        DropdownModule
+        DropdownModule,
+        CalendarModule
     ],
     providers: [MessageService],
     bootstrap: [AppComponent]
