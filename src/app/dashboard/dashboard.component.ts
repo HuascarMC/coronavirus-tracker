@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { DashboardService } from "./dashboard.service";
+
 import { MapComponent } from "./map/map.component";
 
 @Component({

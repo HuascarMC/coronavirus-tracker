@@ -14,8 +14,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DropdownModule } from "primeng/dropdown";
 import { SideBarComponent } from "./side-bar/side-bar.component";
 import { CalendarModule } from "primeng/calendar";
-import { MapComponent } from "./dashboard/map/map.component";
 import { GoogleMapsModule } from "@angular/google-maps";
+import { MapComponent } from "./dashboard/map/map.component";
 
 @NgModule({
     declarations: [
