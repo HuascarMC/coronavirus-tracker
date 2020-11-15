@@ -4,32 +4,58 @@
         <div class="stats-container">
             <div class="col-10">
                 <h4>Total Confirmed:</h4>
-                <h4 style="color: #4bc0c0;">{{ confirmed | number }}</h4>
+                <h4 style="color: #4bc0c0">{{ confirmed | number }}</h4>
             </div>
             <div class="col-10">
                 <h4>Total Deaths:</h4>
-                <h4 style="color: red;">{{ deaths | number }}</h4>
+                <h4 style="color: red">{{ deaths | number }}</h4>
             </div>
             <div class="col-10">
                 <h4>Total Recovered:</h4>
-                <h4 style="color: #3a7c30;">{{ recovered | number }}</h4>
+                <h4 style="color: #3a7c30">{{ recovered | number }}</h4>
             </div>
         </div>
     </div>
     <div class="row-fluid">
-        <h2>Regions:</h2>
+        <h2>Selected Country:</h2>
         <div class="stats-container">
             <div class="col-10">
-                <h4>Total Confirmed:</h4>
-                <h4 style="color: #4bc0c0;">{{ confirmed | number }}</h4>
+                <h4>Population:</h4>
+                <h4
+                    style="color: #4bc0c0"
+                    *ngIf="
+                        countryPopulationData &&
+                        countryPopulationData.population
+                    "
+                >
+                    {{ countryPopulationData.population | number }}
+                </h4>
+                <h4 style="color: #4bc0c0" *ngIf="!countryPopulationData">
+                    {{ "Not available" }}
+                </h4>
             </div>
             <div class="col-10">
-                <h4>Total Deaths:</h4>
-                <h4 style="color: red;">{{ deaths | number }}</h4>
+                <h4>Tests:</h4>
+                <h4
+                    style="color: #4bc0c0"
+                    *ngIf="countryPopulationData && countryPopulationData.tests"
+                >
+                    {{ countryPopulationData.tests | number }}
+                </h4>
+                <h4 style="color: #4bc0c0" *ngIf="!countryPopulationData">
+                    {{ "Not available" }}
+                </h4>
             </div>
             <div class="col-10">
-                <h4>Total Recovered:</h4>
-                <h4 style="color: #3a7c30;">{{ recovered | number }}</h4>
+                <h4>Death Ratio:</h4>
+                <h4 style="color: #3a7c30">
+                    {{
+                        countryPopulationData &&
+                        countryPopulationData.deaths_ratio
+                            ? countryPopulationData.deaths_ratio
+                            : "Not available"
+                    }}
+                </h4>
             </div>
         </div>
     </div>

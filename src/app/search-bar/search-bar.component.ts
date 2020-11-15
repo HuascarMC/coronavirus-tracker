@@ -37,13 +37,11 @@ export class SearchBarComponent implements OnInit {
     fetchCountries(event) {
         let query = event.query;
         this.searchBarService.fetchCountries().subscribe((countries) => {
-            console.log(countries);
             this.countries = this.filterCountry(query, Object.keys(countries));
         });
     }
 
     search(event) {
-        console.log(event);
         const country = event.target.elements[0].value;
         this.searchSubmit.emit(this.toTitleCase(country));
     }

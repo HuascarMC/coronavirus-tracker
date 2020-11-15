@@ -14,6 +14,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DropdownModule } from "primeng/dropdown";
 import { SideBarComponent } from "./side-bar/side-bar.component";
 import { CalendarModule } from "primeng/calendar";
+import { MapComponent } from "./dashboard/map/map.component";
+import { GoogleMapsModule } from "@angular/google-maps";
 
 @NgModule({
     declarations: [
@@ -22,7 +24,8 @@ import { CalendarModule } from "primeng/calendar";
         SummarySectionComponent,
         TopBarComponent,
         SearchBarComponent,
-        SideBarComponent
+        SideBarComponent,
+        MapComponent
     ],
     imports: [
         FormsModule,
@@ -33,7 +36,8 @@ import { CalendarModule } from "primeng/calendar";
         AutoCompleteModule,
         BrowserAnimationsModule,
         DropdownModule,
-        CalendarModule
+        CalendarModule,
+        GoogleMapsModule
     ],
     providers: [MessageService],
     bootstrap: [AppComponent]

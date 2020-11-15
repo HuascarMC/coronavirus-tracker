@@ -1,45 +1,64 @@
 <p-toast></p-toast>
 <div class="row col-12">
-    <h2 class="col-5">{{ country }}</h2>
-    <div class="row col-7 date-container">
-        <h4>From:</h4>
-        <p-calendar
-            class="ui-calendar ui-calendar-button"
-            [(ngModel)]="fromDate"
-            [style]="{ width: '80%', display: 'inline-flex', height: '34px' }"
-            [minDate]="minDate"
-            [maxDate]="maxDate"
-            (onSelect)="onSelect($event)"
-        ></p-calendar>
-        <h4 style="padding-left: 10px;">To:</h4>
-        <p-calendar
-            class="ui-calendar ui-calendar-button"
-            [style]="{ width: '80%', display: 'inline-flex', height: '34px' }"
-            [(ngModel)]="toDate"
-            [disabled]="!fromDate"
-            [minDate]="minDate"
-            [maxDate]="maxDate"
-            (onSelect)="onSelect($event)"
-        ></p-calendar>
+    <h4 class="col-5">{{ country }}</h4>
+    <div
+        class="row col-lg-7 col-md-7 col-sm-12 col-xs-12 date-container"
+        style="margin: 1em 0"
+    >
+        <div class="col-6">
+            <p-calendar
+                class="ui-calendar ui-calendar-button"
+                [(ngModel)]="fromDate"
+                [style]="{
+                    width: '130px',
+                    display: 'inline-flex',
+                    height: '34px'
+                }"
+                [minDate]="minDate"
+                [maxDate]="maxDate"
+                [touchUI]="true"
+                [readonlyInput]="true"
+                placeholder="From date:"
+                (onSelect)="onSelect($event)"
+            ></p-calendar>
+        </div>
+        <div class="col-6">
+            <p-calendar
+                class="ui-calendar ui-calendar-button"
+                [style]="{
+                    width: '130px',
+                    display: 'inline-flex',
+                    height: '34px'
+                }"
+                [(ngModel)]="toDate"
+                [disabled]="!fromDate"
+                [minDate]="minDate"
+                [maxDate]="maxDate"
+                [touchUI]="true"
+                [readonlyInput]="true"
+                placeholder="To date:"
+                (onSelect)="onSelect($event)"
+            ></p-calendar>
+        </div>
     </div>
 </div>
 <div class="row">
-    <div class="column col-md-2">
+    <div class="column col-md-2 d-none d-md-block">
         <div class="meta-data">
             <b>Total Comfirmed: </b>
-            <h2 style="color: #4bc0c0;">
+            <h2 style="color: #4bc0c0">
                 {{ this.data.slice(-1)[0].confirmed | number }}
             </h2>
         </div>
         <div class="meta-data">
             <b>Deaths: </b>
-            <h2 style="color: red;">
+            <h2 style="color: red">
                 {{ this.data.slice(-1)[0].deaths | number }}
             </h2>
         </div>
         <div class="meta-data">
             <b>Recovered </b>
-            <h2 style="color: #3a7c30;">
+            <h2 style="color: #3a7c30">
                 {{ this.data.slice(-1)[0].recovered | number }}
             </h2>
         </div>

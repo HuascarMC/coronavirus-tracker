@@ -10,7 +10,10 @@ import { MessageService, UIChart } from "primeng";
 export class SummarySectionComponent implements OnInit {
     @Input() data: any;
     @Input() country: string;
+    @Input() trendData: any;
+    @Input() countrySummaryData: any;
     @ViewChild("lineChart") chart: Chart;
+
     dataSet: any;
     chartOptions: any;
     last = 7;
@@ -26,10 +29,12 @@ export class SummarySectionComponent implements OnInit {
     constructor(private messageService: MessageService) {}
 
     ngOnInit() {
-        this.minDate = new Date(this.data[0].date);
-        this.maxDate = new Date(this.data[this.data.length - 1].date);
-        this.getSelectedData();
-        this.setChart();
+        if (this.trendData) {
+            this.minDate = new Date(this.data[0].date);
+            this.maxDate = new Date(this.data[this.data.length - 1].date);
+            this.getSelectedData();
+            this.setChart();
+        }
     }
 
     ngOnChanges() {
@@ -39,9 +44,6 @@ export class SummarySectionComponent implements OnInit {
 
     onSelect(event) {
         Promise.resolve(this.getSelectedData()).then(() => {
-            console.log(this.confirmed);
-            console.log(this.deaths);
-            console.log(this.recovered);
             this.setChart();
         });
     }
@@ -195,6 +197,7 @@ export class SummarySectionComponent implements OnInit {
         };
         this.chartOptions = {
             responsive: true,
+            maintainAspectRatio: true,
             chart: {
                 backgroundColor: "gray"
             },

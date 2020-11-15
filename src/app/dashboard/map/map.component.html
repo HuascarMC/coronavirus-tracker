@@ -1,0 +1,21 @@
+<div style="margin: auto;">
+    <google-map
+        height="400px"
+        width="100%"
+        [center]="center"
+        [zoom]="zoom"
+        [options]="options"
+        (mapClick)="addMarker($event)"
+        (mapMousemove)="move($event)"
+        (mapRightclick)="removeLastMarker()"
+    >
+        <map-marker
+            #marker
+            *ngFor="let markerPosition of markerPositions"
+            [position]="markerPosition"
+            [options]="markerOptions"
+            (mapClick)="openInfoWindow(marker)"
+        ></map-marker>
+        <map-info-window>Info Window content</map-info-window>
+    </google-map>
+</div>

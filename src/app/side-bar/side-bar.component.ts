@@ -8,6 +8,8 @@ import { SideBarService } from "./side-bar.service";
 })
 export class SideBarComponent implements OnInit {
     @Input() data;
+    @Input() altData;
+    @Input() countryPopulationData;
 
     confirmed: number;
     deaths: number;
@@ -19,14 +21,29 @@ export class SideBarComponent implements OnInit {
         this.confirmed = 0;
         this.deaths = 0;
         this.recovered = 0;
-        this.getTotals();
+
+        if (this.data) {
+            this.getTotals();
+        } else {
+            this.getAltTotals();
+        }
+    }
+
+    ngOnChanges() {
+        this.ngOnInit();
     }
 
     getTotals() {
-        for (let c in this.data) {
-            this.confirmed += this.data[c].slice(-1)[0].confirmed;
-            this.deaths += this.data[c].slice(-1)[0].deaths;
-            this.recovered += this.data[c].slice(-1)[0].recovered;
+        this.confirmed += this.data.regions.world.totals.confirmed;
+        this.deaths += this.data.regions.world.totals.deaths;
+        this.recovered += this.data.regions.world.totals.recovered;
+    }
+
+    getAltTotals() {
+        for (let c in this.altData) {
+            this.confirmed += this.altData[c].slice(-1)[0].confirmed;
+            this.deaths += this.altData[c].slice(-1)[0].deaths;
+            this.recovered += this.altData[c].slice(-1)[0].recovered;
         }
     }
 }

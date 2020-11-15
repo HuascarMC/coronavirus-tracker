@@ -28,11 +28,12 @@ button[type="submit"] {
     justify-content: center;
     text-transform: uppercase;
     text-align: center;
-    width: 98% !important;
+    width: 100% !important;
 }
 
 ::ng-deep body .ui-button {
     background-color: #62d152;
+    display: none;
 }
 
 ::ng-deep body .ui-button.ui-button-icon-only .ui-button-text {
@@ -42,4 +43,5 @@ button[type="submit"] {
 
 ::ng-deep body .ui-button:enabled:hover {
     background-color: #24bf11;
+    display: none;
 }
