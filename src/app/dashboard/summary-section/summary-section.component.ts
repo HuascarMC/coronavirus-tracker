@@ -215,7 +215,8 @@ export class SummarySectionComponent implements OnInit {
                         },
                         ticks: {
                             fontColor: "white",
-                            fontSize: 15
+                            fontSize: 15,
+                            labelOffset: 25
                         }
                     }
                 ],
@@ -226,7 +227,12 @@ export class SummarySectionComponent implements OnInit {
                         },
                         ticks: {
                             fontColor: "white",
-                            fontSize: 15
+                            fontSize: 15,
+                            callback: function (label) {
+                                return label / 1000 + "k";
+                            },
+                            labelOffset: 0,
+                            maxTicksLimit: 7
                         }
                     }
                 ]

@@ -46,4 +46,11 @@ export class SideBarComponent implements OnInit {
             this.recovered += this.altData[c].slice(-1)[0].recovered;
         }
     }
+
+    getDeathRatio() {
+        return this.countryPopulationData &&
+            this.countryPopulationData.deaths_ratio
+            ? this.countryPopulationData.deaths_ratio
+            : "Not available";
+    }
 }
