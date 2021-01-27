@@ -31,9 +31,10 @@ export class DashboardComponent implements OnInit {
         this.boardService
             .fetchLatLng(this.country)
             .subscribe((response: any) => {
-                if (response.status && response.status.length > 0) {
-                    this.latitude = response.results[0].geometry.location.lat;
-                    this.longitude = response.results[0].geometry.location.lng;
+                if (response && response.length > 0) {
+                    response = response[0];
+                    this.latitude = response.latitude;
+                    this.longitude = response.longitude;
                 }
             });
     }

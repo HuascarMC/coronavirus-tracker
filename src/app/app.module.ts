@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppComponent } from "./app.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
@@ -16,6 +16,7 @@ import { SideBarComponent } from "./side-bar/side-bar.component";
 import { CalendarModule } from "primeng/calendar";
 import { GoogleMapsModule } from "@angular/google-maps";
 import { MapComponent } from "./dashboard/map/map.component";
+import { HeaderInterceptor } from "./utils/header.interceptor";
 
 @NgModule({
     declarations: [
@@ -39,7 +40,10 @@ import { MapComponent } from "./dashboard/map/map.component";
         CalendarModule,
         GoogleMapsModule
     ],
-    providers: [MessageService],
+    providers: [
+        MessageService,
+        { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

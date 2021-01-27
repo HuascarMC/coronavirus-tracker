@@ -10,26 +10,26 @@ export class DashboardService {
     constructor(private http: HttpClient) {}
 
     fetchLatLng(country: string) {
-        return this.http.get(
-            `https://maps.googleapis.com/maps/api/geocode/json?address=${country}&key=AIzaSyAlEYeGSCg2-NVgpk1TpIzAXTMAJXDwY_M`
-        );
+        return this.http
+            .get(`http://localhost:3000/geocoder?country=${country}`)
+            .pipe(catchError((error: any) => Observable.throw(error.error)));
     }
 
     fetchPomber() {
         return this.http
-            .get("https://pomber.github.io/covid19/timeseries.json")
+            .get("http://localhost:3000/covid/pomber")
             .pipe(catchError((error: any) => Observable.throw(error.error)));
     }
 
     fetchCov19() {
         return this.http
-            .get("https://cov19.cc/report.json?v=" + Math.random())
+            .get("http://localhost:3000/covid/report")
             .pipe(catchError((error: any) => Observable.throw(error.error)));
     }
 
     fetchCov19Trend() {
         return this.http
-            .get("https://cov19.cc/trend.json")
+            .get("http://localhost:3000/covid/trend")
             .pipe(catchError((error: any) => Observable.throw(error.error)));
     }
 }
