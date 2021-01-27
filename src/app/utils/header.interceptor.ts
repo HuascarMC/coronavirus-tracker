@@ -19,7 +19,7 @@ export class HeaderInterceptor implements HttpInterceptor {
         return next.handle(
             request.clone({
                 setHeaders: {
-                    // Authorization: `Bearer ${AUTHORIZATION}`
+                    Authorization: `Bearer ${AUTHORIZATION}`
                 }
             })
         );
