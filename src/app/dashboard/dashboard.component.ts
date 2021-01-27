@@ -24,7 +24,11 @@ export class DashboardComponent implements OnInit {
         this.fetchCovidWorldData();
         this.fetchCovidTrendData();
         this.fetchPomberData();
-        setTimeout(() => this.updateCountry("Dominican Republic"), 400);
+        setTimeout(() => {
+            if (this.covidCountryData && this.covidCountryData.regions) {
+                this.updateCountry("Dominican Republic");
+            }
+        }, 400);
     }
 
     fetchLatLng(): any {
