@@ -16,7 +16,7 @@ import { SideBarComponent } from "./side-bar/side-bar.component";
 import { CalendarModule } from "primeng/calendar";
 import { GoogleMapsModule } from "@angular/google-maps";
 import { MapComponent } from "./dashboard/map/map.component";
-import { HeaderInterceptor } from "./utils/header.interceptor";
+import { HeaderInterceptor } from "./interceptors/header.interceptor";
 
 @NgModule({
     declarations: [

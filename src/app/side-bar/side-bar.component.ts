@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { SideBarService } from "./side-bar.service";
+import { Component, OnInit, Input } from '@angular/core';
+import { SideBarService } from './side-bar.service';
 
 @Component({
-    selector: "app-side-bar",
-    templateUrl: "./side-bar.component.html",
-    styleUrls: ["./side-bar.component.css"]
+    selector: 'app-side-bar',
+    templateUrl: './side-bar.component.html',
+    styleUrls: ['./side-bar.component.css']
 })
 export class SideBarComponent implements OnInit {
     @Input() data;
@@ -33,6 +33,10 @@ export class SideBarComponent implements OnInit {
         this.ngOnInit();
     }
 
+    isTypeNumber(variable) {
+        return typeof variable == 'number';
+    }
+
     getTotals() {
         this.confirmed += this.data.regions.world.totals.confirmed;
         this.deaths += this.data.regions.world.totals.deaths;
@@ -51,6 +55,6 @@ export class SideBarComponent implements OnInit {
         return this.countryPopulationData &&
             this.countryPopulationData.deaths_ratio
             ? this.countryPopulationData.deaths_ratio
-            : "Not available";
+            : 'Not available';
     }
 }

@@ -1,16 +1,10 @@
-import {
-    Component,
-    OnInit,
-    EventEmitter,
-    Output,
-    ɵConsole
-} from "@angular/core";
-import { SearchBarService } from "./search-bar.service";
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { SearchBarService } from './search-bar.service';
 
 @Component({
-    selector: "app-search-bar",
-    templateUrl: "./search-bar.component.html",
-    styleUrls: ["./search-bar.component.css"]
+    selector: 'app-search-bar',
+    templateUrl: './search-bar.component.html',
+    styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
     @Output() searchSubmit = new EventEmitter<any>();

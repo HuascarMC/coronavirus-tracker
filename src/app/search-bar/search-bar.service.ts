@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { ErrorUtils } from '../utils/error.utils';
 
 @Injectable({
-    providedIn: "root"
+    providedIn: 'root'
 })
 export class SearchBarService {
     constructor(private http: HttpClient) {}
@@ -20,8 +20,8 @@ export class SearchBarService {
     // }
 
     fetchCountries() {
-        return this.http.get(
-            "https://pomber.github.io/covid19/timeseries.json"
-        );
+        return this.http
+            .get('http://localhost:3000/covid/pomber')
+            .pipe(catchError((error: any) => ErrorUtils.Handle(error)));
     }
 }

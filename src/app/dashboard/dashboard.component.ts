@@ -1,15 +1,17 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { DashboardService } from "./dashboard.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { of } from 'rxjs';
+import { HttpUtils } from '../utils/http.utils';
+import { DashboardService } from './dashboard.service';
 
-import { MapComponent } from "./map/map.component";
+import { MapComponent } from './map/map.component';
 
 @Component({
-    selector: "app-dashboard",
-    templateUrl: "./dashboard.component.html",
-    styleUrls: ["./dashboard.component.css"]
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-    @ViewChild("map") map: MapComponent;
+    @ViewChild('map') map: MapComponent;
     pomberData: any;
     covidData: any;
     covidCountryData: any;
@@ -21,14 +23,18 @@ export class DashboardComponent implements OnInit {
     constructor(private boardService: DashboardService) {}
 
     ngOnInit(): void {
-        this.fetchCovidWorldData();
-        this.fetchCovidTrendData();
-        this.fetchPomberData();
-        setTimeout(() => {
-            if (this.covidCountryData && this.covidCountryData.regions) {
-                this.updateCountry("Dominican Republic");
+        this.getData();
+    }
+
+    private async getData() {
+        this.covidData = await this.fetchCovidWorldData();
+        this.covidTrendData = await this.fetchCovidTrendData();
+        await this.fetchPomberData().then((data) => {
+            this.pomberData = data;
+            if (this.covidData && this.covidData.regions) {
+                this.updateCountry('Dominican Republic');
             }
-        }, 400);
+        });
     }
 
     fetchLatLng(): any {
@@ -44,25 +50,19 @@ export class DashboardComponent implements OnInit {
     }
 
     fetchPomberData(): any {
-        this.boardService.fetchPomber().subscribe((response) => {
-            this.pomberData = response;
-        });
+        return this.boardService.fetchPomber().toPromise();
     }
 
     fetchCovidWorldData(): any {
-        this.boardService.fetchCov19().subscribe((response) => {
-            this.covidData = response;
-        });
+        return this.boardService.fetchCov19().toPromise();
     }
 
     fetchCovidTrendData(): any {
-        this.boardService.fetchCov19Trend().subscribe((response) => {
-            this.covidTrendData = response;
-        });
+        return this.boardService.fetchCov19Trend().toPromise();
     }
 
     updateCountry(event) {
-        event = event === "us" || event === "US" ? "United States" : event;
+        event = event === 'us' || event === 'US' ? 'United States' : event;
         this.country = event;
         this.covidCountryData = this.covidData.regions.world.list.find(
             (country) => country.country === this.country
@@ -74,6 +74,6 @@ export class DashboardComponent implements OnInit {
     }
 
     getCountryFormatForTrend() {
-        return this.country.replace(/\s/g, "").toLowerCase();
+        return this.country.replace(/\s/g, '').toLowerCase();
     }
 }

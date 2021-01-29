@@ -31,7 +31,7 @@
                     {{ countryPopulationData.population | number }}
                 </h4>
                 <h4 style="color: #4bc0c0" *ngIf="!countryPopulationData">
-                    {{ "Not available" }}
+                    {{ 'Not available' }}
                 </h4>
             </div>
             <div class="col-10">
@@ -43,13 +43,17 @@
                     {{ countryPopulationData.tests | number }}
                 </h4>
                 <h4 style="color: #4bc0c0" *ngIf="!countryPopulationData">
-                    {{ "Not available" }}
+                    {{ 'Not available' }}
                 </h4>
             </div>
             <div class="col-10">
                 <h4>Death Ratio:</h4>
                 <h4 style="color: #3a7c30">
-                    {{ this.getDeathRatio() | number: "1.4" }}
+                    {{
+                        this.isTypeNumber(this.getDeathRatio())
+                            ? (this.getDeathRatio() | number: '1.4')
+                            : this.getDeathRatio()
+                    }}
                 </h4>
             </div>
         </div>
