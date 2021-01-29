@@ -1,4 +1,5 @@
 <div *ngIf="pomberData">
+    <app-loading-mask [loading]="false"></app-loading-mask>
     <app-search-bar (searchSubmit)="updateCountry($event)"></app-search-bar>
     <div class="row">
         <app-side-bar

@@ -10,7 +10,7 @@ img.kofiimg {
     margin-right: 5px;
     margin-left: 0;
     margin-bottom: 3px;
-    content: url("https://ko-fi.com/img/cup-border.png");
+    content: url('https://ko-fi.com/img/cup-border.png');
 }
 .kofiimg:after {
     vertical-align: middle;
@@ -22,7 +22,7 @@ img.kofiimg {
     margin-right: 6px;
     margin-left: 0;
     margin-bottom: 4px !important;
-    content: url("https://ko-fi.com/img/whitelogo.svg");
+    content: url('https://ko-fi.com/img/whitelogo.svg');
 }
 .btn-container {
     display: inline-block !important;
@@ -61,7 +61,7 @@ a.kofi-button {
     overflow-wrap: break-word;
     vertical-align: middle;
     border: 0 none #fff !important;
-    font-family: "Quicksand", Helvetica, Century Gothic, sans-serif !important;
+    font-family: 'Quicksand', Helvetica, Century Gothic, sans-serif !important;
     text-decoration: none;
     text-shadow: none;
     font-weight: 700 !important;
@@ -128,9 +128,9 @@ a.kofi-button:active {
     font-weight: 600;
 }
 :host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-        "Segoe UI Symbol";
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol';
     font-size: 14px;
     color: #333;
     box-sizing: border-box;
@@ -287,7 +287,7 @@ a:hover {
 }
 
 .terminal::before {
-    content: "\2022 \2022 \2022";
+    content: '\2022 \2022 \2022';
     position: absolute;
     top: 0;
     left: 0;
@@ -401,5 +401,45 @@ svg#clouds {
     svg#rocket-smoke {
         display: none;
         visibility: hidden;
+    }
+}
+
+.vivify {
+    -webkit-animation-duration: 0.8s;
+    -webkit-animation-fill-mode: both;
+    animation-duration: 0.8s;
+    animation-fill-mode: both;
+}
+.infinite {
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+.pulsate {
+    -webkit-animation-name: pulsate;
+    animation-name: pulsate;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+}
+@keyframes pulsate {
+    0% {
+        -webkit-animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    50% {
+        -webkit-transform: scale3d(0.8, 0.8, 0.8);
+        transform: scale3d(0.8, 0.8, 0.8);
+    }
+    100% {
+        -webkit-animation-timing-function: cubic-bezier(
+            0.895,
+            0.03,
+            0.685,
+            0.22
+        );
+        animation-timing-function: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
     }
 }
