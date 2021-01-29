@@ -21,7 +21,7 @@ export class SearchBarService {
 
     fetchCountries() {
         return this.http
-            .get('http://localhost:3000/covid/pomber')
+            .get('https://covid19-proxy-nodejs.herokuapp.com/covid/pomber')
             .pipe(catchError((error: any) => ErrorUtils.Handle(error)));
     }
 }

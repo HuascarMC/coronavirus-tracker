@@ -13,25 +13,27 @@ export class DashboardService {
 
     fetchLatLng(country: string) {
         return this.http
-            .get(`http://localhost:3000/geocoder?country=${country}`)
+            .get(
+                `https://covid19-proxy-nodejs.herokuapp.com/geocoder?country=${country}`
+            )
             .pipe(catchError((error: any) => ErrorUtils.Handle(error)));
     }
 
     fetchPomber() {
         return this.http
-            .get('http://localhost:3000/covid/pomber')
+            .get('https://covid19-proxy-nodejs.herokuapp.com/covid/pomber')
             .pipe(catchError((error: any) => ErrorUtils.Handle(error)));
     }
 
     fetchCov19() {
         return this.http
-            .get('http://localhost:3000/covid/report')
+            .get('https://covid19-proxy-nodejs.herokuapp.com/covid/report')
             .pipe(catchError((error: any) => ErrorUtils.Handle(error)));
     }
 
     fetchCov19Trend() {
         return this.http
-            .get('http://localhost:3000/covid/trend')
+            .get('https://covid19-proxy-nodejs.herokuapp.com/covid/trend')
             .pipe(catchError((error: any) => ErrorUtils.Handle(error)));
     }
 }
