@@ -410,6 +410,7 @@ svg#clouds {
     animation-duration: 0.8s;
     animation-fill-mode: both;
 }
+
 .infinite {
     -webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
