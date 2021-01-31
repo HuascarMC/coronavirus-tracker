@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { of } from 'rxjs';
-import { HttpUtils } from '../utils/http.utils';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { LoadingMaskComponent } from '../loading-mask/loading-mask.component';
 import { DashboardService } from './dashboard.service';
-
 import { MapComponent } from './map/map.component';
 
 @Component({
@@ -10,8 +8,10 @@ import { MapComponent } from './map/map.component';
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
     @ViewChild('map') map: MapComponent;
+    @ViewChild('loadingMask') loadingMask: LoadingMaskComponent;
+
     pomberData: any;
     covidData: any;
     covidCountryData: any;
@@ -22,22 +22,26 @@ export class DashboardComponent implements OnInit {
 
     constructor(private boardService: DashboardService) {}
 
-    ngOnInit(): void {
+    ngOnInit(): void {}
+
+    ngAfterViewInit(): void {
         this.getData();
     }
 
     private async getData() {
+        this.loadingMask.show();
         this.covidData = await this.fetchCovidWorldData();
         this.covidTrendData = await this.fetchCovidTrendData();
         await this.fetchPomberData().then((data) => {
             this.pomberData = data;
             if (this.covidData && this.covidData.regions) {
                 this.updateCountry('Dominican Republic');
+                setTimeout(() => this.loadingMask.hide(), 1500);
             }
         });
     }
 
-    fetchLatLng(): any {
+    fetchLatLng(): void {
         this.boardService
             .fetchLatLng(this.country)
             .subscribe((response: any) => {
@@ -49,19 +53,19 @@ export class DashboardComponent implements OnInit {
             });
     }
 
-    fetchPomberData(): any {
+    fetchPomberData(): Promise<any> {
         return this.boardService.fetchPomber().toPromise();
     }
 
-    fetchCovidWorldData(): any {
+    fetchCovidWorldData(): Promise<any> {
         return this.boardService.fetchCov19().toPromise();
     }
 
-    fetchCovidTrendData(): any {
+    fetchCovidTrendData(): Promise<any> {
         return this.boardService.fetchCov19Trend().toPromise();
     }
 
-    updateCountry(event) {
+    updateCountry(event): void {
         event = event === 'us' || event === 'US' ? 'United States' : event;
         this.country = event;
         this.covidCountryData = this.covidData.regions.world.list.find(
@@ -73,7 +77,7 @@ export class DashboardComponent implements OnInit {
         }
     }
 
-    getCountryFormatForTrend() {
+    getCountryFormatForTrend(): string {
         return this.country.replace(/\s/g, '').toLowerCase();
     }
 }
