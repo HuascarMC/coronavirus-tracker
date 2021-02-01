@@ -1,6 +1,6 @@
 # Coronavirus Tracker
 
-See it live [here](https://huascarmc.github.io/coronavirus-tracker/)
+See it live [here](https://huasmc.github.io/coronavirus-tracker/)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
 
