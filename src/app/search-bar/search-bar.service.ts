@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ErrorUtils } from '../utils/error.utils';
+import { Endpoints } from 'src/assets/endpoints.config';
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +22,7 @@ export class SearchBarService {
 
     fetchCountries() {
         return this.http
-            .get('https://covid19-proxy-nodejs.herokuapp.com/covid/pomber')
+            .get(Endpoints.POMBER)
             .pipe(catchError((error: any) => ErrorUtils.Handle(error)));
     }
 }

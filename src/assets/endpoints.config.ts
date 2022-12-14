@@ -1,4 +1,4 @@
-const BASE_URL: string = 'https://covid19-proxy-nodejs.herokuapp.com/';
+const BASE_URL: string = 'http://localhost:3000/';
 
 export const Endpoints = {
     GEOCODER: BASE_URL + 'geocoder',

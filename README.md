@@ -1,3 +1,7 @@
+# Setup
+
+Add API key in index.html
+
 # Coronavirus Tracker
 
 See it live [here](https://huasmc.github.io/coronavirus-tracker/)
